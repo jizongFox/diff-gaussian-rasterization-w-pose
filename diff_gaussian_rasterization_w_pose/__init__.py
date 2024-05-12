@@ -267,6 +267,7 @@ class GaussianRasterizationSettings(NamedTuple):
     """w2c^{T}"""
     projmatrix: torch.Tensor
     """(proj@world2cam)^{T}"""
+    projmatrix_raw: torch.Tensor
     sh_degree: int
     campos: torch.Tensor
     prefiltered: bool
