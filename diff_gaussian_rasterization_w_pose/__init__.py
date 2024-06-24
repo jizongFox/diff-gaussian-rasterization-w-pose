@@ -144,7 +144,7 @@ class _RasterizeGaussians(torch.autograd.Function):
             binningBuffer,
             imgBuffer,
         )
-        return color, radii, depth, opacity, n_touched
+        return color, depth, opacity, radii
 
     @staticmethod
     def backward(
@@ -153,7 +153,7 @@ class _RasterizeGaussians(torch.autograd.Function):
         grad_out_radii,
         grad_out_depth,
         grad_out_opacity,
-        grad_n_touched,
+        grad_n_touched=None,
     ):
 
         # Restore necessary values from context
@@ -336,7 +336,7 @@ class GaussianRasterizer(nn.Module):
             rho = torch.Tensor([])
 
         # Invoke C++/CUDA rasterization routine
-        return rasterize_gaussians(
+        return  rasterize_gaussians(
             means3D,
             means2D,
             shs,
